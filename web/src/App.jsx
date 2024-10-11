@@ -3,8 +3,6 @@ import {io} from "socket.io-client";
 
 const App = (() => {
 
-    const baseURL = import.meta.env.BASE_URL;
-
     const [socket, setSocket] = useState(null);
     const [data, setData] = useState("");
 
@@ -19,7 +17,7 @@ const App = (() => {
 
     const sendPing = () => {
         (async () => {
-            const response = await fetch(`${baseURL}ping`, {
+            const response = await fetch(`/ping`, {
                 method: 'POST',
             });
             if (response.ok) {
