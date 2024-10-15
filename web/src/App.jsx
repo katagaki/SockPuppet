@@ -28,6 +28,11 @@ const App = (() => {
         })();
     };
 
+    const sendHeartbeat = () => {
+        setTimeout(() => sendHeartbeat(), 20000);
+        socket.emit("heartbeat", 1);
+    };
+
     const getImmediateResponse = () => {
         if (socket) {
             socket.emit("data", "immediate");
@@ -53,10 +58,14 @@ const App = (() => {
                 "localhost:3000",
                 {
                     path: "/sync",
-                    transports: ["websocket"]
+                    transports: ["websocket"],
+                    pingInterval: 30000,
+                    pingTimeout: 10000,
+                    upgradeTimeout: 10000
                 }
             );
             socket.open();
+            setTimeout(() => sendHeartbeat(), 20000);
 
             setSocket(socket);
 
