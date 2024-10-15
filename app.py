@@ -42,6 +42,11 @@ def handle_message(data):
         socketio.start_background_task(send_time_at_regular_intervals)
 
 
+@socketio.on("heartbeat")
+def heartbeat():
+    socketio.send(f"Heartbeat response to keep connection alive.", to="Room 1")
+
+
 @socketio.on("disconnect")
 def disconnected():
     leave_room("Room 1", request.sid)
