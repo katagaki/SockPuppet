@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from flask_socketio import SocketIO, join_room, leave_room
 
-app = Flask(__name__, static_url_path="", static_folder="web", template_folder="web")
+app = Flask(__name__, static_url_path="", static_folder="web/build", template_folder="web/build")
 app.config["SECRET_KEY"] = str(uuid4())
 
 CORS(app, resources={r"/*": {"origins": "*"}})
